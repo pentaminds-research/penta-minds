@@ -563,7 +563,7 @@
 
     .info-card {
       align-items: center;
-      background: var(--white);
+      background-color: #ffffff !important; /* Forces the card to match the logo background */
       border: 1px solid var(--line);
       display: flex;
       flex-direction: column;
@@ -591,8 +591,12 @@
     }
 
     .affiliation-logo {
-    mix-blend-mode: multiply;
-    filter: contrast(1.1); /* Optional: makes the logo colors pop more */
+      display: block;
+      margin: 0 auto 12px auto;
+      max-height: 60px;
+      max-width: 140px;
+      object-fit: contain;
+      background: transparent;
 }
 
     .team-section {
