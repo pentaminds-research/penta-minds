@@ -2032,7 +2032,7 @@ const adminPasswordInput = document.getElementById("admin-password-input");
 const adminError = document.getElementById("admin-error");
 
 adminTrigger.addEventListener("click", () => {
-  adminPanel.style.display = adminPanel.style.display === "flex" ? "none" : "flex";
+  adminPanel.style.display = "flex";
   adminTrigger.style.display = "none";
   adminPasswordInput.focus();
 });
@@ -2062,6 +2062,7 @@ adminPasswordInput.addEventListener("keydown", (e) => {
   <input id="admin-password-input" type="password" placeholder="Enter password" style="padding:9px 14px;border-radius:6px;border:none;font-size:14px;width:200px;outline:none;">
   <button id="admin-login-btn" style="background:#E87722;color:#fff;border:none;border-radius:6px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer;">Unlock</button>
   <p id="admin-error" style="color:#ff6b6b;font-size:12px;margin:0;display:none;">Incorrect password.</p>
+  <button onclick="document.getElementById('admin-panel').style.display='none';document.getElementById('admin-trigger').style.display='flex';" style="background:transparent;color:rgba(255,255,255,0.5);font-size:12px;border:none;cursor:pointer;margin-top:4px;">Cancel</button>
 </div>
 
 <button id="admin-trigger" title="Admin" style="position:fixed;bottom:24px;right:24px;z-index:8999;width:42px;height:42px;border-radius:50%;background:#0D2145;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
