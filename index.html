@@ -591,13 +591,9 @@
     }
 
     .affiliation-logo {
-      display: block;
-      margin: 0 auto 12px auto;
-      max-height: 60px;
-      max-width: 140px;
-      object-fit: contain;
-      background: transparent;
-    }
+    mix-blend-mode: multiply;
+    filter: contrast(1.1); /* Optional: makes the logo colors pop more */
+}
 
     .team-section {
       background: var(--white);
@@ -1444,7 +1440,7 @@
       <div class="container">
         <div class="accent-bar reveal" aria-hidden="true"></div>
         <h2 class="section-title reveal">Our Affiliation</h2>
-        <div class="cards-2">
+        <div class="cards-3">
           <article class="info-card reveal">
             <span class="icon" aria-hidden="true">
             <img src="GPAI.jpg" alt="GPAI Logo" class="affiliation-logo"></span>
