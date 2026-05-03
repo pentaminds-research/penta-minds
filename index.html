@@ -627,29 +627,32 @@
     }
 
     .avatar {
-      align-items: center;
-      background: var(--navy);
-      border: 4px solid rgba(232, 119, 34, 0.18);
-      border-radius: 50%;
-      color: var(--white);
-      display: inline-flex;
-      font-size: 1.35rem;
-      font-weight: 800;
-      height: 82px;
-      justify-content: center;
-      margin: 0 auto 18px;
-      overflow: hidden;
-      position: relative;
-      width: 82px;
-    }
+  align-items: center;
+  background: var(--navy);
+  border: 4px solid rgba(232, 119, 34, 0.18);
+  border-radius: 50%;
+  color: var(--white);
+  display: inline-flex;
+  font-size: 1.35rem;
+  font-weight: 800;
+  height: 100px;
+  width: 100px;
+  justify-content: center;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
 
     .avatar img {
-      height: 100%;
-      inset: 0;
-      object-fit: cover;
-      position: absolute;
-      width: 100%;
-    }
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+}
 
     .avatar-upload {
       align-items: center;
@@ -684,6 +687,20 @@
       position: absolute;
       width: 7px;
     }
+
+    .avatar-upload,
+.avatar-reset {
+  display: none !important;
+}
+
+body.admin-mode .avatar-upload,
+body.admin-mode .avatar-reset {
+  display: inline-flex !important;
+}
+
+body.admin-mode .avatar-reset {
+  display: inline-flex !important;
+}
 
     .avatar:hover .avatar-upload,
     .avatar-upload:focus-visible {
@@ -1436,18 +1453,15 @@
         <h2 class="section-title reveal">Our Affiliation</h2>
         <div class="cards-3">
           <article class="info-card reveal">
-            <span class="icon" aria-hidden="true">
-            <img src="GPAI.jpg" alt="GPAI Logo" class="affiliation-logo"></span>
+            <img src="GPAI.jpg" alt="GPAI Logo" class="affiliation-logo">
             <h3>GPAI India Student Community</h3>
           </article>
           <article class="info-card reveal">
-            <span class="icon" aria-hidden="true">
-            <img src="Inria.png" alt="Inria Logo" class="affiliation-logo"></span>
+            <img src="Inria.png" alt="Inria Logo" class="affiliation-logo">
             <h3>Inria, France — Organising Body</h3>
           </article>
           <article class="info-card reveal">
-            <span class="icon" aria-hidden="true">
-            <img src="OECD.png" alt="OECD Logo" class="affiliation-logo"></span>
+            <img src="OECD.png" alt="OECD Logo" class="affiliation-logo">
             <h3>OECD — Output Audience</h3>
           </article>
         </div>
@@ -2008,6 +2022,51 @@
         document.body.classList.remove("is-loading");
       }, 1500);
     });
+
+    const ADMIN_PASSWORD = "hello@pentaminds";
+
+const adminTrigger = document.getElementById("admin-trigger");
+const adminPanel = document.getElementById("admin-panel");
+const adminLoginBtn = document.getElementById("admin-login-btn");
+const adminPasswordInput = document.getElementById("admin-password-input");
+const adminError = document.getElementById("admin-error");
+
+adminTrigger.addEventListener("click", () => {
+  adminPanel.style.display = adminPanel.style.display === "flex" ? "none" : "flex";
+  adminTrigger.style.display = "none";
+  adminPasswordInput.focus();
+});
+
+adminLoginBtn.addEventListener("click", () => {
+  if (adminPasswordInput.value === ADMIN_PASSWORD) {
+    document.body.classList.add("admin-mode");
+    adminPanel.style.display = "none";
+    adminTrigger.style.display = "none";
+    adminError.style.display = "none";
+    adminPasswordInput.value = "";
+  } else {
+    adminError.style.display = "block";
+    adminPasswordInput.value = "";
+    adminPasswordInput.focus();
+  }
+});
+
+adminPasswordInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") adminLoginBtn.click();
+});
+    
   </script>
+
+  <div id="admin-panel" style="position:fixed;bottom:24px;right:24px;z-index:9000;display:none;flex-direction:column;gap:10px;background:#0D2145;padding:20px 24px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.28);">
+  <p style="color:#fff;font-size:13px;font-weight:700;margin:0 0 6px;">Admin Access</p>
+  <input id="admin-password-input" type="password" placeholder="Enter password" style="padding:9px 14px;border-radius:6px;border:none;font-size:14px;width:200px;outline:none;">
+  <button id="admin-login-btn" style="background:#E87722;color:#fff;border:none;border-radius:6px;padding:9px 14px;font-weight:800;font-size:14px;cursor:pointer;">Unlock</button>
+  <p id="admin-error" style="color:#ff6b6b;font-size:12px;margin:0;display:none;">Incorrect password.</p>
+</div>
+
+<button id="admin-trigger" title="Admin" style="position:fixed;bottom:24px;right:24px;z-index:8999;width:42px;height:42px;border-radius:50%;background:#0D2145;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+</button>
+  
 </body>
 </html>
